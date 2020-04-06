@@ -1,0 +1,21 @@
+{
+  "name": "psdvalid",
+  "version": "1.3.8",
+  "description": "",
+  "author": "fudg1",
+  "main": "index.js",
+  "bin": {
+    "psdvalid": "./bin/index.js"
+  },
+  "scripts": {
+    "start": "node --max-old-space-size=2048  ./bin/index.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "coffee-script": "^1.12.7",
+    "del": "^5.1.0",
+    "image-size": "^0.8.3",
+    "psd": "^3.2.0",
+    "sharp": "^0.23.3"
+  }
+}
