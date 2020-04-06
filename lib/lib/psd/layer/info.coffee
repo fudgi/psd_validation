@@ -35,6 +35,7 @@ LAYER_INFO = {
   vectorOrigination:      require('../layer_info/vector_origination.coffee')
   vectorStroke:           require('../layer_info/vector_stroke.coffee')
   vectorStrokeContent:    require('../layer_info/vector_stroke_content.coffee')
+  smartObjectLayerData:    require('../layer_info/smart_object_layer_data.coffee')
 }
 
 module.exports =

@@ -21,6 +21,7 @@ module.exports = function () {
       console.log("Работаю с :", file);
       const psd = new PSD(file, defaults);
       psd.checkSize();
+      console.log(psd.getProblems().join("."));
     }
   };
 
