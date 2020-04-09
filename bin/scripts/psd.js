@@ -25,6 +25,7 @@ class PSD {
     this.layers = this.parsePSD();
     this.checkSize();
     this.sortOutLayers(this.layers.children());
+    //TODO проверка флага рефов
     return this.problemsList;
   }
   parsePSD() {
@@ -39,6 +40,10 @@ class PSD {
   }
   checkLayer(layer) {
     this.checkLayerName(layer);
+    if (["ref", "noref"].includes(layer.name.toLowerCase())) {
+      //TODO проверка на таб
+      //TODO проверка на два рефа, флаг наличия рефов
+    }
     this.checkForSmart(layer);
     this.checkForEmptyLayer(layer);
     this.checkForMask(layer);
