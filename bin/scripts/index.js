@@ -17,11 +17,16 @@ module.exports = function () {
   };
 
   const processPSDs = (arrPsd) => {
+    console.log("--");
     for (const file of arrPsd) {
       console.log("Работаю с :", file);
       const psd = new PSD(file, defaults);
-      psd.checkSize();
-      console.log(psd.getProblems().join("."));
+      const foundProblems = psd.check().join(".\n");
+      if (foundProblems) {
+        console.log(`Проблемы:`);
+        console.log(foundProblems);
+        console.log("--");
+      }
     }
   };
 
