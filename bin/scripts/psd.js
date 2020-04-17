@@ -1,4 +1,4 @@
-const PSDLib = require("../../lib");
+const PSDLib = require("../../lib/psd.js");
 
 class PSD {
   constructor(filename, defaults) {
@@ -25,7 +25,9 @@ class PSD {
     this.layers = this.parsePSD();
     this.checkSize();
     this.sortOutLayers(this.layers.children());
-    //TODO проверка флага рефов
+    if (!this.isRefAppeared) {
+      this.setProblem("Нет слоя ref или noref");
+    }
     return this.problemsList;
   }
   parsePSD() {
@@ -41,8 +43,15 @@ class PSD {
   checkLayer(layer) {
     this.checkLayerName(layer);
     if (["ref", "noref"].includes(layer.name.toLowerCase())) {
-      //TODO проверка на таб
-      //TODO проверка на два рефа, флаг наличия рефов
+      this.setAndCheckRefFlag(layer);
+      try {
+        const refText = layer.get("typeTool").textValue;
+        this.checkTabSign(refText);
+      } catch (err) {
+        this.setProblem(
+          `'${layer.name}' - не удалось получить текст. возможно, слой не текстовый`
+        );
+      }
     }
     this.checkForSmart(layer);
     this.checkForEmptyLayer(layer);
@@ -81,6 +90,17 @@ class PSD {
   }
   setProblem(problem) {
     this.problemsList.push(problem);
+  }
+  setAndCheckRefFlag(layer) {
+    if (this.isRefAppeared) {
+      this.setProblem(`'${layer.name}' - В макете несколько слоев ref `);
+    }
+    this.isRefAppeared = true;
+  }
+  checkTabSign(refText) {
+    if (refText.match(/\t/g).length) {
+      this.setProblem("В источнике использован TAB");
+    }
   }
 }
 
