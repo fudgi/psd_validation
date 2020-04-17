@@ -1,23 +1,24 @@
 const psdConvDefaults = require("./defaults");
+const package = require("../../package.json");
 const { findPSD } = require("./helpers");
 const { PSD } = require("./psd");
 
-module.exports = function () {
-  const defaults = {
-    ...psdConvDefaults,
-  };
-  let beginTime;
+const defaults = {
+  ...psdConvDefaults,
+};
 
+module.exports = function (callDir = defaults.callDir) {
   const start = () => {
-    const arrPsd = findPSD(defaults.callDir);
+    const arrPsd = findPSD(callDir);
+    console.log("PSDVALID@" + package.version);
+    console.log("\nЗдравствуй! Сейчас я проверю все макеты.\n");
     console.log("Нашел:", arrPsd);
-    beginTime = Date.now();
+    console.log("--\n");
     processPSDs(arrPsd);
     console.log("--------------------------------");
   };
 
   const processPSDs = (arrPsd) => {
-    console.log("--");
     for (const file of arrPsd) {
       console.log("Работаю с :", file);
       const psd = new PSD(file, defaults);
@@ -25,22 +26,10 @@ module.exports = function () {
       if (foundProblems) {
         console.log(`Проблемы:`);
         console.log(foundProblems);
-        console.log("--");
+        console.log("--\n");
       }
     }
   };
-
-  process.on("exit", () => {
-    if (beginTime) {
-      const endTime = Date.now();
-      console.log(
-        `Процесс завершен. Затраченное время: ${(
-          (endTime - beginTime) /
-          1000
-        ).toFixed(2)} секунд`
-      );
-    }
-  });
 
   start();
 };

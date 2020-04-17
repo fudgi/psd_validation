@@ -1,6 +1,6 @@
 {
   "name": "psdvalid",
-  "version": "1.3.8",
+  "version": "0.0.2",
   "description": "",
   "author": "fudg1",
   "main": "index.js",
@@ -13,11 +13,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "coffee-script": "^1.12.7",
-    "del": "^5.1.0",
-    "image-size": "^0.8.3",
     "pkg": "^4.4.7",
-    "psd": "^3.2.0",
-    "sharp": "^0.23.3"
+    "psd": "^3.2.0"
   }
 }
