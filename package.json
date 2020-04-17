@@ -1,15 +1,15 @@
 {
   "name": "psdvalid",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "",
   "author": "fudg1",
-  "main": "index.js",
+  "main": "psdvalid.js",
   "bin": {
-    "psdvalid": "./bin/index.js"
+    "psdvalid": "./bin/psdvalid.js"
   },
   "scripts": {
-    "start": "node --max-old-space-size=2048  ./bin/index.js",
-    "build:win": "pkg ./bin/index.js --target node10-win-x64"
+    "start": "node --max-old-space-size=2048  ./bin/psdvalid.js",
+    "build:win": "pkg ./bin/psdvalid.js --target node10-win-x64"
   },
   "license": "ISC",
   "dependencies": {

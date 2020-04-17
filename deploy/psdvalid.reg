@@ -1,0 +1,13 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\psdvalid]
+@="&Validate PSD files in folder"
+
+[HKEY_CLASSES_ROOT\Directory\Background\shell\psdvalid\command]
+@="C:\\psdvalid\\psdvalid.exe"
+
+[HKEY_CLASSES_ROOT\Directory\shell\psdvalid]
+@="&Validate PSD files in folder"
+
+[HKEY_CLASSES_ROOT\Directory\shell\psdvalid\command]
+@="C:\\psdvalid\\psdvalid.exe %1"

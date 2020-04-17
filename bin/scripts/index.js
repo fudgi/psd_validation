@@ -9,13 +9,16 @@ const defaults = {
 
 module.exports = function (callDir = defaults.callDir) {
   const start = () => {
-    const arrPsd = findPSD(callDir);
+    defaults.callDir = callDir + "/";
     console.log("PSDVALID@" + package.version);
     console.log("\nЗдравствуй! Сейчас я проверю все макеты.\n");
+    const arrPsd = findPSD(callDir);
+    if (!arrPsd.length) return;
     console.log("Нашел:", arrPsd);
     console.log("--\n");
     processPSDs(arrPsd);
     console.log("--------------------------------");
+    console.log("Процесс завершен. Хорошего дня!");
   };
 
   const processPSDs = (arrPsd) => {

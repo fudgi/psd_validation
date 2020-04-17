@@ -20,14 +20,11 @@ const findPSD = (dirname) => {
     console.warn("\x1b[41m", "Неверно задана папка для поиска");
     console.log("\x1b[0m");
     console.log(err);
-    process.exit(0);
   }
 
   if (arrPsd.length === 0) {
     console.warn("\x1b[41m", "В этой папке нет psd", path.resolve(dirname));
     console.log("\x1b[0m");
-    // console.log(err);
-    process.exit(0);
   }
   return arrPsd;
 };
