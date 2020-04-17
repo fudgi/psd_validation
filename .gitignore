@@ -3,3 +3,5 @@ node_modules
 /psd
 package-lock.json
 *.psd
+*.exe
+*.zip
