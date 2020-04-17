@@ -1,4 +1,4 @@
-const PSDLib = require("../../lib/psd.js");
+const PSDLib = require("../../compiled/psd.js");
 
 class PSD {
   constructor(filename, defaults) {
