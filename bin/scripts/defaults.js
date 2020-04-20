@@ -5,6 +5,8 @@ const data = {
     { width: 2560, height: 1600 },
     { width: 1600, height: 720 },
   ],
+  excludeSmartLayers: ["ref", "noref", "global"],
+  refsLayes: ["ref", "noref"],
 };
 
 module.exports = data;

@@ -42,16 +42,9 @@ class PSD {
   }
   checkLayer(layer) {
     this.checkLayerName(layer);
-    if (["ref", "noref"].includes(layer.name.toLowerCase())) {
+    if (this.defaults.refsLayes.includes(layer.name.toLowerCase())) {
       this.setAndCheckRefFlag(layer);
-      try {
-        const refText = layer.get("typeTool").textValue;
-        this.checkTabSign(refText);
-      } catch (err) {
-        this.setProblem(
-          `'${layer.name}' - не удалось получить текст. возможно, слой не текстовый`
-        );
-      }
+      this.getText(layer);
     }
     this.checkForSmart(layer);
     this.checkForEmptyLayer(layer);
@@ -66,7 +59,7 @@ class PSD {
       );
   }
   checkForSmart(layer) {
-    if (layer.name.toLowerCase() == "ref") return;
+    if (this.defaults.excludeSmartLayers.includes(layer.name)) return;
     if (!layer.get("infoKeys").includes("SoLd")) {
       this.setProblem(`'${layer.name}' - слой не смарт`);
     }
@@ -97,8 +90,21 @@ class PSD {
     }
     this.isRefAppeared = true;
   }
+  getText(layer) {
+    if (layer.name.toLowerCase() == "ref") {
+      try {
+        const refText = layer.get("typeTool").textValue;
+        this.checkTabSign(refText);
+      } catch (err) {
+        this.setProblem(
+          `'${layer.name}' - не удалось получить текст. возможно, слой не текстовый`
+        );
+      }
+    }
+  }
   checkTabSign(refText) {
-    if (refText.match(/\t/g).length) {
+    const match = refText.match(/\t/g);
+    if (match && match.length) {
       this.setProblem("В источнике использован TAB");
     }
   }
