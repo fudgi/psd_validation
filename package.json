@@ -1,6 +1,6 @@
 {
   "name": "psdvalid",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "",
   "author": "fudg1",
   "main": "psdvalid.js",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node --max-old-space-size=2048  ./bin/psdvalid.js",
-    "build:win": "pkg ./bin/psdvalid.js --target node10-win-x64"
+    "buildwin": "pkg ./bin/psdvalid.js --target node10-win-x64"
   },
   "license": "ISC",
   "dependencies": {

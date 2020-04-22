@@ -45,9 +45,11 @@ class PSD {
     if (this.defaults.refsLayes.includes(layer.name.toLowerCase())) {
       this.setAndCheckRefFlag(layer);
       this.getText(layer);
+    } else {
+      //слой не реф
+      this.checkForSmart(layer);
+      this.checkForEmptyLayer(layer);
     }
-    this.checkForSmart(layer);
-    this.checkForEmptyLayer(layer);
     this.checkForMask(layer);
     this.checkBlendMode(layer);
   }
@@ -81,9 +83,7 @@ class PSD {
       this.setProblem(`'${layer.name}' - установлен режим наложения`);
     }
   }
-  setProblem(problem) {
-    this.problemsList.push(problem);
-  }
+
   setAndCheckRefFlag(layer) {
     if (this.isRefAppeared) {
       this.setProblem(`'${layer.name}' - В макете несколько слоев ref `);
@@ -107,6 +107,9 @@ class PSD {
     if (match && match.length) {
       this.setProblem("В источнике использован TAB");
     }
+  }
+  setProblem(problem) {
+    this.problemsList.push(problem);
   }
 }
 

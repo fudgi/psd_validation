@@ -15,7 +15,6 @@ module.exports = function (callDir = defaults.callDir) {
     const arrPsd = findPSD(callDir);
     if (!arrPsd.length) return;
     console.log("Нашел:", arrPsd);
-    console.log("--\n");
     processPSDs(arrPsd);
     console.log("--------------------------------");
     console.log("Процесс завершен. Хорошего дня!");
@@ -23,14 +22,15 @@ module.exports = function (callDir = defaults.callDir) {
 
   const processPSDs = (arrPsd) => {
     for (const file of arrPsd) {
-      console.log("Работаю с :", file);
       const psd = new PSD(file, defaults);
-      const foundProblems = psd.check().join(".\n");
+      const foundProblems = psd.check().join("\n");
       if (foundProblems) {
-        console.log(`Проблемы:`);
-        console.log(foundProblems);
-        console.log("--\n");
-      }
+        // console.log("\x1b[0m", "");
+        console.log("\x1b[41m%s\x1b[0m", file, "\x1b[0m", "\x1b[31m");
+        // console.log(" Проблемы:");
+        console.log(foundProblems, "\x1b[0m");
+        console.log("\x1b[0m", "");
+      } else console.log("\x1b[32m", file, "- все хорошо", "\x1b[0m");
     }
   };
 
